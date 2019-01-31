@@ -1,7 +1,7 @@
 <?php
 $servername = "bdm25683025.my3w.com";
 $username = "bdm25683025";
-$password = "3315315xx";
+$password = "3315315Xx";
 $dbname = "bdm25683025_db";
 
 // 创建连接
