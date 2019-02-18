@@ -15,6 +15,7 @@ $sql = "SELECT name FROM event where pid = $id order by lime desc";
     
     //echo "多少分";
     echo json_encode($eame);
+    //
     
 $conn->close();
 
