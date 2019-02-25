@@ -8,7 +8,6 @@
 </head>
 <body>
 	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		mui.init()
 	</script>
@@ -29,7 +28,7 @@
 						日常
 					</a>
 					<script type="text/javascript">
-						mui.ajax('getnv.php', {
+						mui.ajax('ajax/getnv.php', {
                         data: {
                             cat: '日常'
 						},
@@ -38,7 +37,7 @@
                         type: 'post', //HTTP请求类型
                         timeout: 10000, //超时时间设置为10秒；
                         success: function (data) {
-							result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+							result = data; //js原生方法解析json字符串为json对象
                         },
 					});
 					</script>
@@ -52,7 +51,7 @@
 						运动
 					</a>
 					<script type="text/javascript">
-						mui.ajax('getnv.php', {
+						mui.ajax('ajax/getnv.php', {
                         data: {
                             cat: '运动'
 						},
@@ -61,7 +60,7 @@
                         type: 'post', //HTTP请求类型
                         timeout: 10000, //超时时间设置为10秒；
                         success: function (data) {
-							result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+							result = data; //js原生方法解析json字符串为json对象
                         },
 					});
 					</script>
@@ -74,7 +73,7 @@
 						娱乐
 					</a>
 					<script type="text/javascript">
-						mui.ajax('getnv.php', {
+						mui.ajax('ajax/getnv.php', {
                         data: {
                             cat: '娱乐'
 						},
@@ -83,7 +82,7 @@
                         type: 'post', //HTTP请求类型
                         timeout: 10000, //超时时间设置为10秒；
                         success: function (data) {
-							result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+							result = data; //js原生方法解析json字符串为json对象
                         },
 					});
 					</script>
@@ -96,7 +95,7 @@
 						其他
 					</a>
 					<script type="text/javascript">
-						mui.ajax('getnv.php', {
+						mui.ajax('ajax/getnv.php', {
                         data: {
                             cat: '其他'
 						},
@@ -105,7 +104,7 @@
                         type: 'post', //HTTP请求类型
                         timeout: 10000, //超时时间设置为10秒；
                         success: function (data) {
-							result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+							result = data; //js原生方法解析json字符串为json对象
                         },
 					});
 					</script>
