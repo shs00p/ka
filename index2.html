@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="css/mui.css"/>
+</head>
+<body>
+	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init()
+	</script>
+	<div class="mui-content">
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item">
+				<span class="mui-icon mui-icon-phone"></span>
+				<span class="mui-tab-label">电话</span>
+			</a>
+		</nav>
+		<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="punch.html?id=1&name=日常">
+						日常
+					</a>
+					<script type="text/javascript">
+						mui.ajax('ajax/getnv.php', {
+                        data: {
+                            cat: '日常'
+						},
+						async:false,
+                        dataType: 'json', //服务器返回json格式数据
+                        type: 'post', //HTTP请求类型
+                        timeout: 10000, //超时时间设置为10秒；
+                        success: function (data) {
+							result = data; //js原生方法解析json字符串为json对象
+                        },
+					});
+					</script>
+					<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" id="addrc">
+						<script>document.write(result);</script>
+					</button>
+
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="punch.html?id=2&name=运动">
+						运动
+					</a>
+					<script type="text/javascript">
+						mui.ajax('ajax/getnv.php', {
+                        data: {
+                            cat: '运动'
+						},
+						async:false,
+                        dataType: 'json', //服务器返回json格式数据
+                        type: 'post', //HTTP请求类型
+                        timeout: 10000, //超时时间设置为10秒；
+                        success: function (data) {
+							result = data; //js原生方法解析json字符串为json对象
+                        },
+					});
+					</script>
+					<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" id="addyd">
+						<script>document.write(result);</script>
+					</button>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="punch.html?id=3&name=娱乐">
+						娱乐
+					</a>
+					<script type="text/javascript">
+						mui.ajax('ajax/getnv.php', {
+                        data: {
+                            cat: '娱乐'
+						},
+						async:false,
+                        dataType: 'json', //服务器返回json格式数据
+                        type: 'post', //HTTP请求类型
+                        timeout: 10000, //超时时间设置为10秒；
+                        success: function (data) {
+							result = data; //js原生方法解析json字符串为json对象
+                        },
+					});
+					</script>
+					<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" id="addyd">
+						<script>document.write(result);</script>
+					</button>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="punch.html?id=4&name=其他">
+						其他
+					</a>
+					<script type="text/javascript">
+						mui.ajax('ajax/getnv.php', {
+                        data: {
+                            cat: '其他'
+						},
+						async:false,
+                        dataType: 'json', //服务器返回json格式数据
+                        type: 'post', //HTTP请求类型
+                        timeout: 10000, //超时时间设置为10秒；
+                        success: function (data) {
+							result = data; //js原生方法解析json字符串为json对象
+                        },
+					});
+					</script>
+					<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" id="addyd">
+						<script>document.write(result);</script>
+					</button>
+				</li>
+			</ul>
+	</div>
+	<script type="text/javascript">
+		document.getElementById('addrc').addEventListener('tap', function() {
+			mui.openWindow('login.html')
+		})
+		document.getElementById('addyd').addEventListener('tap', function() {
+			mui.openWindow('t.html')
+		})
+	</script>
+</body>
+</html>

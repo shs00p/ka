@@ -2,20 +2,30 @@
 header('Content-type:text/html; Charset=gb2312'); 
 include '../conn.php';
 
-$p = $_POST['p'];
-//$id = 2;
+$id = $_POST['id'];
+$name = $_POST['name'];
+$pid = $_POST['pid'];
+$type = $_POST['type'];
 
-  // $sql = "SELECT name FROM event where pid = $id order by lime desc";
-  // $result = $conn->query($sql);
-  //   if ($result->num_rows > 0) {
-  //     while($row = $result->fetch_assoc()) {
-  //       $eame[] = $row['name'];
-  //     }
-  //   }
-    
-    //echo "多少分";
+// $id = 12;
+// $name = "洗澡";
+// $pid = 1;
+// $type = 1;
+
+if ($type == 1) {
+  $sql = "insert into punch (name,eid,tid,pid,pime) value ('$name','$id','$type','$pid',".time().")";
+  if ($conn->query($sql) === TRUE) {
     echo 1;
-    //
+  }
+}
+
+if ($type == 2) {
+  $sql = "insert into punch (name,eid,tid,pid,sime) value ('$name','$id','$type','$pid',".time().")";
+  if ($conn->query($sql) === TRUE) {
+    echo 2;
+  }
+}
+   
 
 
     
