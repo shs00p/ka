@@ -1,5 +1,5 @@
 <?php
-header('Content-type:text/html; Charset=gb2312'); 
+header('Content-type:text/html; Charset=gb2312');
 include '../conn.php';
 
 $id = $_POST['id'];
@@ -7,10 +7,14 @@ $name = $_POST['name'];
 $pid = $_POST['pid'];
 $type = $_POST['type'];
 
-// $id = 12;
+ //$id = 12;
 // $name = "洗澡";
 // $pid = 1;
 // $type = 1;
+
+$sql = "update event set lime = ".time()." where id = '$id'";
+if ($conn->query($sql) === TRUE) {
+}
 
 if ($type == 1) {
   $sql = "insert into punch (name,eid,tid,pid,pime) value ('$name','$id','$type','$pid',".time().")";
@@ -25,10 +29,7 @@ if ($type == 2) {
     echo 2;
   }
 }
-   
 
-
-    
 $conn->close();
 
 ?>

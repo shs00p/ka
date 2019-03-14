@@ -45,8 +45,8 @@
                         var html =
                             "<button type='button' style='margin:4px 4px' class='mui-btn mui-btn-primary mui-btn-outlined' id=" +
                             data[i].id + ">" + data[i].name + "</button>"
-                        document.write(html);
-                        document.getElementById(data[i].id).addEventListener("tap", function () {
+                            document.write(html);
+                            document.getElementById(data[i].id).addEventListener("tap", function () {
                             mui.ajax('ajax/ka.php', {
                                 data: {
                                     id: data[i].id,

@@ -3,7 +3,7 @@ header('Content-type:text/html; Charset=gb2312');
 include '../conn.php';
 
 
-$sql = "select name,from_unixtime(sime,'%Y-%m-%d %H:%i:%S') sime from punch where sime <> '' and ISNULL(eime) order by id asc";
+$sql = "select id,name,from_unixtime(sime,'%m-%d %H:%i') sime from punch where sime <> '' and ISNULL(eime) order by id asc";
 $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

@@ -33,10 +33,32 @@
 					success: function (data) {
 						var html = "<ul class='mui-table-view'>";
 						for (let i = 0; i < data.length; i++) {
-							html += "<li class='mui-table-view-cell' id="+data[i].id+">"+data[i].name+"      "+data[i].sime+"</li>"									
+							html = "<li class='mui-table-view-cell' id="+data[i].id+">"+data[i].name+"      "+data[i].sime+"</li>"		
+							document.writeln(html);
+							document.getElementById(data[i].id).addEventListener("tap", function () {
+								mui.ajax('ajax/getCe.php', {
+                                data: {
+                                    id: data[i].id
+                                },
+                                dataType: 'json', //服务器返回json格式数据
+                                type: 'post', //HTTP请求类型
+                                timeout: 10000, //超时时间设置为10秒；
+                                success: function (data) {
+                                    var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+                                    console.log(result);
+                                    if (result == 1) {
+                                        mui.alert("记录成功", "恭喜", "关闭", function () {
+                                            mui.openWindow({
+                                                url: 'index.html',
+                                            });
+                                        });
+                                    }
+                                },
+                            });
+						});						
 						}				
-						document.writeln(html);
-					},
+						
+					}
 				});
 				</script>
 		</ul>
