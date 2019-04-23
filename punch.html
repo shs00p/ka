@@ -33,7 +33,7 @@
     </header>
     <div class="mui-content">
         <script>
-            arr = new Array();
+            var arr = new Array("","primary","success","purple");
             mui.ajax('ajax/getEa.php', {
                 data: "id=" + pid,
                 async: false,
@@ -43,44 +43,93 @@
                 success: function (data) {
                     for (let i = 0; i < data.length; i++) {
                         var html =
-                            "<button type='button' style='margin:4px 4px' class='mui-btn mui-btn-primary mui-btn-outlined' id=" +
+                            "<button type='button' style='margin:4px 4px' class='mui-btn mui-btn-"+ arr[data[i].type] +" mui-btn-outlined' id=" +
                             data[i].id + ">" + data[i].name + "</button>"
                             document.write(html);
                             document.getElementById(data[i].id).addEventListener("tap", function () {
-                            mui.ajax('ajax/ka.php', {
-                                data: {
-                                    id: data[i].id,
-                                    name: data[i].name,
-                                    pid: data[i].pid,
-                                    type: data[i].type
-                                },
-                                dataType: 'json', //服务器返回json格式数据
-                                type: 'post', //HTTP请求类型
-                                timeout: 10000, //超时时间设置为10秒；
-                                success: function (data) {
-                                    var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
-                                    console.log(result);
-                                    if (result == 1) {
-                                        mui.alert("记录成功", "恭喜", "关闭", function () {
-                                            mui.openWindow({
-                                                url: 'index.html',
+                            if (data[i].type == 1) {
+                                mui.prompt("", "", "请输入备注", function(e) {
+                                    mui.ajax('ajax/Sp.php', {
+                                        data: {
+                                            remarks: e.value,
+                                            id: data[i].id,
+                                            name: data[i].name,
+                                            pid: data[i].pid
+                                        },
+                                        dataType: 'json', //服务器返回json格式数据
+                                        type: 'post', //HTTP请求类型
+                                        timeout: 10000, //超时时间设置为10秒；
+                                        success: function (data) {
+                                            var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+                                            console.log(result);
+                                            if (result == 1) {
+                                                mui.alert("记录成功", "恭喜", "关闭", function () {
+                                                    mui.openWindow({
+                                                        url: 'index.html',
+                                                    });
+                                                });
+                                            }
+                                        },
+                                    });
+                                });
+                            } else if (data[i].type == 2) {
+                                mui.ajax('ajax/Sse.php', {
+                                    data: {
+                                        id: data[i].id,
+                                        name: data[i].name,
+                                        pid: data[i].pid
+                                    },
+                                    dataType: 'json', //服务器返回json格式数据
+                                    type: 'post', //HTTP请求类型
+                                    timeout: 10000, //超时时间设置为10秒；
+                                    success: function (data) {
+                                        var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+                                        console.log(result);
+                                        if (result == 1) {
+                                            mui.alert("记录开始", "注意", "关闭", function () {
+                                                mui.openWindow({
+                                                    url: 'continue.html',
+                                                });
                                             });
+                                        }
+                                    },
+                                });
+                            }  else if (data[i].type == 3) {
+                                mui.prompt("", "", "输入数量", function(e) {
+                                    if (e.index == 1) {
+                                        mui.ajax('ajax/Spn.php', {
+                                            data: {
+                                                num: e.value,
+                                                id: data[i].id,
+                                                name: data[i].name,
+                                                pid: data[i].pid,
+                                                type: data[i].type
+                                            },
+                                            dataType: 'json', //服务器返回json格式数据
+                                            type: 'post', //HTTP请求类型
+                                            timeout: 10000, //超时时间设置为10秒；
+                                            success: function (data) {
+                                                var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+                                                console.log(result);
+                                                if (result == 1) {
+                                                    mui.alert("记录成功", "恭喜", "关闭", function () {
+                                                        mui.openWindow({
+                                                            url: 'index.html',
+                                                        });
+                                                    });
+                                                }
+                                            },
                                         });
                                     }
-                                    if (result == 2) {
-                                        mui.alert("记录开始", "注意", "关闭", function () {
-                                            mui.openWindow({
-                                                url: 'continue.html',
-                                            });
-                                        });
-                                    }
-                                },
-                            });
+                                },"div");
+                                document.querySelector('.mui-popup-input input').type='number'
+                            }
                         });
                     }
                 },
             });
         </script>
+        <div id="info"></div>
     </div>
 </body>
 
