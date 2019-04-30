@@ -7,7 +7,7 @@ $now = time();
 $lime = $now- $usime;
 $remarks = $_POST['remarks'];
 
-$sql = "update punch set eime = '$now',lime = '$lime',remarks = '$remarks' where id = '$id'";
+$sql = "update punch set eime = '$now',lime = '$lime',remarks = '$remarks',state = 1 where id = '$id'";
 if ($conn->query($sql) === TRUE) {
   echo "1";
 } else {

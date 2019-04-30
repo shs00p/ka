@@ -15,7 +15,7 @@
 		mui.init()
 	</script>
 	<header class="mui-bar mui-bar-nav">
-		<a href="index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a href="index.html?state=0" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<h1 class="mui-title">
 			未完成
 		</h1>
@@ -58,9 +58,8 @@
 													type: 'post', //HTTP请求类型
 													timeout: 10000, //超时时间设置为10秒；
 													success: function (data) {
-														var result = eval('(' + data +
-															')'); //js原生方法解析json字符串为json对象
-														console.log(result);
+														var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+														//console.log(result);
 														if (result == 1) {
 															mui.alert("记录成功", "恭喜", "关闭",
 																function () {
@@ -96,7 +95,7 @@
 								var html = "<ul class='mui-table-view'>";
 								for (let i = 0; i < data.length; i++) {
 									html = "<li class='mui-table-view-cell' id=" + data[i].id + ">" + data[i].name +
-										"<br>起始：" + data[i].sime + " - " + data[i].eime + "<br>用时: " + Math.round(data[i]
+										"<br>起始：" + data[i].sime + " - " + data[i].eime + "<br>时长: " + Math.round(data[i]
 											.lime / 60) + "分钟</li>"
 									document.writeln(html);
 								}

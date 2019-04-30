@@ -19,7 +19,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 
-$sql = "insert into punch (name,eid,tid,pid,pime,num) value ('$name','$id','$type','$pid',".time().",'$num')";
+$sql = "insert into punch (name,eid,tid,pid,pime,num,state) value ('$name','$id','$type','$pid',".time().",'$num',1)";
   if ($conn->query($sql) === TRUE) {
     echo 1;
   }
