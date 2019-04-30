@@ -14,7 +14,7 @@ if ($type == 0) {
 }
 
 if ($type == 1) {
-  $sql = "select id,name,from_unixtime(sime,'%m-%d %H:%i') sime,from_unixtime(eime,'%H:%i') eime,lime from punch where sime <> '' and eime is not null order by id asc";
+  $sql = "select id,name,from_unixtime(sime,'%m-%d %H:%i') sime,from_unixtime(eime,'%H:%i') eime,lime from punch where sime <> '' and eime is not null order by id desc";
   $result = $conn->query($sql);
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
