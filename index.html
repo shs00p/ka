@@ -14,7 +14,10 @@
 	<script src="js/getUrlParam.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var state = UrlParam.paramValues("state");
-        //alert(id);
+        //alert(id);		
+		if (state == null) {
+			state = 0
+		}
         mui.init()
     </script>
 	<div class="mui-content">
@@ -37,7 +40,8 @@
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
-					success: function (data) {
+					success: function (data) {	
+						console.log(data.length);					
 						if (data.length == null) {
 							mui.openWindow({
 								url: 'continue.html',
@@ -82,7 +86,7 @@
 							if (data[i].tid == 3) {
 								html += "时间：" + data[i].pime + "<br>记录：" + data[i].num
 							}
-							if (data[i].remarks != null) {
+							if (data[i].remarks != null && data[i].remarks != '') {
 								html += "<br>备注：" + data[i].remarks
 							}
 							html += "</div></div></div>"
