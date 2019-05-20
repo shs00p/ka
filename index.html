@@ -14,7 +14,7 @@
 	<script src="js/getUrlParam.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var state = UrlParam.paramValues("state");
-        //alert(id);		
+        //alert(id);
 		if (state == null) {
 			state = 0
 		}
@@ -24,11 +24,11 @@
 		<nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="#list">
 				<span class="mui-icon mui-icon-list"></span>
-				<span class="mui-tab-label">XX</span>
+				<span class="mui-tab-label">Ka</span>
 			</a>
 			<a class="mui-tab-item"  href="#over">
 				<span class="mui-icon mui-icon-flag"></span>
-				<span class="mui-tab-label">XX</span>
+				<span class="mui-tab-label">END</span>
 			</a>
 		</nav>
 
@@ -40,8 +40,8 @@
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
-					success: function (data) {	
-						console.log(data.length);					
+					success: function (data) {
+						//console.log(data.length);
 						if (data.length == null) {
 							mui.openWindow({
 								url: 'continue.html',
@@ -75,7 +75,7 @@
 					success: function (data) {
 						var html = "<ul class='mui-table-view'>";
 						for (let i = 0; i < data.length; i++) {
-							html += "<div class='mui-card'><div class='mui-card-content'><div class='mui-card-content-inner'>" + data[i].name +
+							html += "<a style='color:black' href='edit.html?id="+ data[i].id +"'><div class='mui-card'><div class='mui-card-content'><div class='mui-card-content-inner'>" + data[i].name +
 										"<br>"
 							if (data[i].tid == 1) {
 								html += "时间：" + data[i].pime
@@ -89,7 +89,7 @@
 							if (data[i].remarks != null && data[i].remarks != '') {
 								html += "<br>备注：" + data[i].remarks
 							}
-							html += "</div></div></div>"
+							html += "</div></div></div></a></ul>"
 						}
 						document.writeln(html);
 					},
