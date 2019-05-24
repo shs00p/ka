@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>图标</title>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="css/mui.css" />
+    <style>
+        .chart {
+            height: 200px;
+            margin: 0px;
+            padding: 0px;
+        }
+        h5 {
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        h5:first-child {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body style="height: 100%; margin: 0">
+    <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        mui.init()
+    </script>
+    <div class="mui-content">
+        <div class="mui-content-padded">
+            <div class="chart" id="container"></div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
+    <script type="text/javascript">
+        mui.ajax('ajax/getTz.php', {
+            data: {
+                type: 1
+            },
+            async: false,
+            dataType: 'json', //服务器返回json格式数据
+            type: 'post', //HTTP请求类型
+            timeout: 10000, //超时时间设置为10秒；
+            success: function (data) {
+                window.tz = [];
+                window.pime = [];
+                window.mintz = 0;
+                for (let i = 0; i < data.length; i++) {
+                    tz[i] = data[i].num;
+                    pime[i] = data[i].pime;
+                    if (mintz == 0) {
+                        mintz = data[i].num;
+                    }
+                    if (mintz > data[i].num) {
+                        mintz = data[i].num;
+                    }
+                }
+            }
+        });
+        //console.log(tz);
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: pime
+            },
+            yAxis: {
+                minInterval: 0.1,
+                min: mintz,
+                type: 'value'
+            },
+            series: [{
+                name: '体重',
+                data: tz,
+                type: 'line',
+            }],
+            color:["#91c7ae"]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
+
+</html>

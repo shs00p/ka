@@ -3,90 +3,132 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>修改</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	<link rel="stylesheet" type="text/css" href="css/mui.css"/>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="css/mui.css" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" />
 	<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
 </head>
+
 <body>
 	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/mui.picker.min.js"></script>
 	<script src="js/getUrlParam.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-        var id = UrlParam.paramValues("id");
-        mui.init()
-        </script>
-        <header class="mui-bar mui-bar-nav">
-        	<a href="index.html?state=1" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
-        	<h1 class="mui-title">修改</h1>
-        </header>
-        <div class="mui-content">
-        	<div class="mui-content-padded">
-        		<script type="text/javascript">
-        			mui.ajax('ajax/getEd.php', {
-        				async: false,
-        				data: "id=" + id,
-        				dataType: 'json', //服务器返回json格式数据
-        				type: 'post', //HTTP请求类型
-        				timeout: 10000, //超时时间设置为10秒；
-        				success: function (data) {
-        					var html = "<form method='post' action='ajax/Sc.php'><ul class='mui-table-view'>";
-        					for (let i = 0; i < data.length; i++) {
-								var sime = data[i].sime;
-								var eime = data[i].eime;
-								//console.log(sime);
-        						html += "<li class='mui-table-view-cell'>" + data[i].name + "</li><br><h5 class='mui-content-padded'>开始时间</h5><button type='button' id='sime' data-options='' class='btn mui-btn mui-btn-block'>"+ sime +"</button>"
-        						html += "</button></li>"
-								html += "<br><h5 class='mui-content-padded'>结束时间</h5><button type='button' id='eime' data-options='' class='btn mui-btn mui-btn-block'>"+ eime +"</button>"
-        						html += "</button><input name='id' id='id' value='"+ data[i].id +"'><input name='sime' id='sime' value='"+ sime +"'><input name='csime' id='csime' value='"+ sime +"'><input name='ceime' id='ceime' value='"+ eime +"'><input type='submit' value='修改'></form>"
-        					}
-        					document.writeln(html);
-							$("#sime").attr("data-options",'{"value": "'+ sime + '"}');
-							$("#eime").attr("data-options",'{"value": "'+ eime + '"}');
-        				},
-        			});
-				</script>
-		</div><div id='result' class="ui-alert"></div>
+	<script type="text/javascript">
+		var id = UrlParam.paramValues("id");
+		mui.init()
+	</script>
+	<header class="mui-bar mui-bar-nav">
+		<a href="index.html?state=1" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">修改</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-content-padded">
+			<script type="text/javascript">
+				mui.ajax('ajax/getEd.php', {
+					async: false,
+					data: "id=" + id,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function (data) {
+						//var html = "<form method='post' action='ajax/Sc.php'><ul class='mui-table-view'>";
+						var html = "<ul class='mui-table-view'>";
+						for (let i = 0; i < data.length; i++) {
+							var sime = data[i].sime;
+							var eime = data[i].eime;
+							//console.log(sime);
+							html += "<li class='mui-table-view-cell'>" + data[i].name +
+								"</li><br><h5 class='mui-content-padded'>开始时间</h5><button type='button' id='sime' data-options='' class='btn mui-btn mui-btn-block'>" +
+								sime + "</button>"
+							html += "</button></li>"
+							html +=
+								"<br><h5 class='mui-content-padded'>结束时间</h5><button type='button' id='eime' data-options='' class='btn mui-btn mui-btn-block'>" +
+								eime + "</button>"
+							html += "</button><input id='ok' type='submit' value='修改'>"
+						}
+						document.writeln(html);
+						$("#sime").attr("data-options", '{"value": "' + sime + '"}');
+						$("#eime").attr("data-options", '{"value": "' + eime + '"}');
+					},
+				});
+			</script>
+		</div>
+		<div id='result' class="ui-alert"></div>
 	</div>
 	<script>
-			(function($) {
-				$.init();
-				var sime = $('#sime');
-				sime.each(function(i, btn) {
-					btn.addEventListener('tap', function() {
-						var _self = this;
-							var optionsJson = this.getAttribute('data-options') || '{}';
-							var options = JSON.parse(optionsJson);
-							var id = this.getAttribute('id');
-							_self.picker = new $.DtPicker(options);
-							_self.picker.show(function(rs) {
-								sime.value = rs.text;
-								csime.value = rs.text;
-								_self.picker.dispose();
-								_self.picker = null;
+		(function (pick) {
+			pick.init();
+			var sime = pick('#sime');
+			sime.each(function (i, btn) {
+				btn.addEventListener('tap', function () {
+					var _self = this;
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					_self.picker = new pick.DtPicker(options);
+					_self.picker.show(function (rs) {
+						document.getElementById("sime").innerHTML = rs.text;
+						$("#sime").attr("data-options", '{"value": "' + rs.text + '"}');
+						//console.log(sime.innerText);
+						csime.value = rs.text;
+						_self.picker.dispose();
+						_self.picker = null;
+					});
+				}, false);
+			});
+			var eime = pick('#eime');
+			eime.each(function (i, btn) {
+				btn.addEventListener('tap', function () {
+					var _self = this;
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					_self.picker = new pick.DtPicker(options);
+					_self.picker.show(function (rs) {
+						document.getElementById("eime").innerHTML = rs.text;
+						$("#eime").attr("data-options", '{"value": "' + rs.text + '"}');
+						ceime.value = rs.text;
+						_self.picker.dispose();
+						_self.picker = null;
+					});
+				}, false);
+			});
+		})(mui);
+		document.getElementById("ok").addEventListener("tap", function () {
+			//console.log(id);
+			var sime = Math.round(Date.parse(new Date(document.getElementById("sime").innerHTML)) / 1000);
+			var eime = Math.round(Date.parse(new Date(document.getElementById("eime").innerHTML)) / 1000);
+			if (sime >= eime) {
+				mui.alert('开始时间不能大于结束时间', '警告');
+				return false;
+			}
+			mui.ajax('ajax/getC.php', {
+				data: {
+					sime: sime,
+					eime: eime,
+					id: String(id)
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function (data) {
+					var result = eval('(' + data + ')'); //js原生方法解析json字符串为json对象
+					//console.log(result);
+					if (result == 1) {
+						mui.alert("修改成功", "恭喜", "关闭",
+							function () {
+								mui.openWindow({
+									url: 'index.html',
+								});
 							});
+					}
+				},
+			});
 
-					}, false);
-				});
-				var eime = $('#eime');
-				eime.each(function(i, btn) {
-					btn.addEventListener('tap', function() {
-						var _self = this;
-							var optionsJson = this.getAttribute('data-options') || '{}';
-							var options = JSON.parse(optionsJson);
-							var id = this.getAttribute('id');
-							_self.picker = new $.DtPicker(options);
-							_self.picker.show(function(rs) {
-								eime.innerText = rs.text;
-								ceime.value = rs.text;
-								_self.picker.dispose();
-								_self.picker = null;
-							});
-
-					}, false);
-				});
-			})(mui);
-		</script>
+		});
+	</script>
 </body>
+
 </html>
