@@ -45,8 +45,8 @@
 							html += "</button></li>"
 							html +=
 								"<br><h5 class='mui-content-padded'>结束时间</h5><button type='button' id='eime' data-options='' class='btn mui-btn mui-btn-block'>" +
-								eime + "</button>"
-							html += "</button><input id='ok' type='submit' value='修改'>"
+								eime + "</button><input value='" + data[i].remarks + "'>"
+							html += "<input id='ok' type='submit' value='修改'>"
 						}
 						document.writeln(html);
 						$("#sime").attr("data-options", '{"value": "' + sime + '"}');
